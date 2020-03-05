@@ -12,5 +12,18 @@ jobs:
       - name: Get the release assets info
         uses: kennylindley/get-release-info@master
         id: get_info
-      - name: "print the info"
-        run: echo 'The info was ${{ steps.get_info.outputs.url }}'
+
+      - name: "Configure AWS credentials"
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID}}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: "Download files using the release URLs received earlier"
+        run: "curl -o ${{ steps.get_info.outputs.name }} ${{ steps.get_info.outputs.url }}"
+
+      - name: "Copy file to S3 bucket"
+        run: "aws s3 sync . s3://$AWS_S3_BUCKET/${{ steps.get_info.outputs.version }}"
+        env:
+          AWS_S3_BUCKET: simpleinout-releases
