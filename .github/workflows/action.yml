@@ -1,0 +1,16 @@
+name: Upload to S3
+
+on:
+  release:
+    types: [ published  ]
+
+jobs:
+  upload:
+    name: Uploading
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: Get the release assets info
+        uses: kennylindley/get-release-info@master
+        id: get_info
+      - name: "print the info"
+        run: echo 'The info was ${{ steps.get_info.outputs.url }}'
