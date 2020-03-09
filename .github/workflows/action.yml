@@ -26,7 +26,7 @@ jobs:
         run: |
           for i in $(echo ${{ steps.get_info.outputs.urls }} | sed "s/,/ /g")
           do
-            curl $i
+            curl "$i"
           done
 
       - name: "Copy file to S3 bucket"
