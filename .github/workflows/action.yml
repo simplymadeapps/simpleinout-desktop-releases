@@ -12,7 +12,7 @@ jobs:
       - name: Get the release assets info
         uses: kennylindley/get-release-info@master
         with:
-          matching_regex: \^(?:Simple-In-Out-)[0-9]+\.[0-9]+\.[0-9]+\.(?:dmg|exe)$\
+          matching_regex: ^(?:Simple-In-Out-)[0-9]+\.[0-9]+\.[0-9]+\.(?:dmg|exe)$
         id: get_info
 
       - name: "Configure AWS credentials"
