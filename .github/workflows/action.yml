@@ -22,9 +22,9 @@ jobs:
 
       - name: "Download files using the release URLs received earlier"
         run: |
-          echo ${{ steps.get_info.outputs.urls }}
           for i in $(echo ${{ steps.get_info.outputs.urls }} | sed "s/,/ /g")
           do
+            echo $i
             curl "$i"
           done
 
