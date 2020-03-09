@@ -23,7 +23,11 @@ jobs:
           aws-region: us-east-1
 
       - name: "Download files using the release URLs received earlier"
-        run: "curl -o ${{ steps.get_info.outputs.name }} ${{ steps.get_info.outputs.url }}"
+        run: |
+          for i in $(echo ${{ steps.get_info.outputs.urls }} | sed "s/,/ /g")
+          do
+            curl $i
+          done
 
       - name: "Copy file to S3 bucket"
         run: "aws s3 sync . s3://$AWS_S3_BUCKET/${{ steps.get_info.outputs.version }}"
