@@ -8,7 +8,6 @@
 GitHub Action Setup
 -------------------
 
-
 The workflow actions script relies on a few API keys that we should store in GitHub secrets. These allow access to AWS.
 
 These are the secrets that need to be setup for this action to work:
