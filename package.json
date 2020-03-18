@@ -1,0 +1,29 @@
+{
+  "name": "simpleinout-desktop-releases",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Get the info from a release",
+  "main": "src/main.js",
+  "scripts": {
+    "lint": "eslint 'src/**.js'",
+    "test": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simplymadeapps/simpleinout-desktop-releases"
+  },
+  "keywords": [
+    "actions",
+    "node"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.0.0"
+  },
+  "devDependencies": {
+    "@zeit/ncc": "^0.20.4",
+    "eslint": "^5.13.0",
+    "eslint-config-simplymadeapps": "^1.5.2",
+    "jest": "^25.1.0"
+  }
+}
