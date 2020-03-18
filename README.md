@@ -1,7 +1,7 @@
 # Simple In Out - Desktop Releases Action
-![Build Status](https://github.com/simpleinout-desktop-releases/workflows/.github/workflows/test.yml/badge.svg)
-[![Code Climate](https://codeclimate.com/github/simplymadeapps/simpleinout-desktop-releases/badges/gpa.svg)](https://codeclimate.com/github/simplymadeapps/simpleinout-desktop-releases)
-[![Test Coverage](https://codeclimate.com/github/simplymadeapps/simpleinout-desktop-releases/badges/coverage.svg)](https://codeclimate.com/github/simplymadeapps/simpleinout-desktop-releases/coverage)
+![Build Status](https://github.com/simplymadeapps/simpleinout-desktop-releases/workflows/.github/workflows/test.yml/badge.svg)
+[![Maintainability](https://api.codeclimate.com/v1/badges/359c00496ee730f240d0/maintainability)](https://codeclimate.com/github/simplymadeapps/simpleinout-desktop-releases/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/359c00496ee730f240d0/test_coverage)](https://codeclimate.com/github/simplymadeapps/simpleinout-desktop-releases/test_coverage)
 
 [Simple In/Out](https://www.simpleinout.com)
 
