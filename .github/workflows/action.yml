@@ -24,7 +24,7 @@ jobs:
 
       - name: Get the release assets info
         uses: node12
-        main: src/index.js
+        main: src/main.js
         id: get_info
 
       - name: "Configure AWS credentials"

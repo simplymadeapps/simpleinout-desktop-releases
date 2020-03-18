@@ -2,6 +2,7 @@ name: Test Github Action
 
 on:
   pull_request:
+    types: [ opened, edited ]
     branches: [ master ]
 
 jobs:
@@ -11,7 +12,7 @@ jobs:
 
     steps:
       - name: Checkout from Source Control
-        uses: action/checkout@v2
+        uses: actions/checkout@v2
 
       - name: Setup Node
         uses: actions/setup-node@v1
@@ -21,10 +22,13 @@ jobs:
       - name: Install yarn
         run: npm install -g yarn
 
+      - name: Install dependencies
+        run: yarn install
+
       - name: Setup code coverage
         uses: paambaati/codeclimate-action@v2.5.5
         env:
-          CC_TETS_REPORTER_ID: 81aa23df53dbb8657e66c25de1b4a0d7822e204c8721fcbcde3989ec1352f619
+          CC_TEST_REPORTER_ID: 81aa23df53dbb8657e66c25de1b4a0d7822e204c8721fcbcde3989ec1352f619
         with:
           coverageCommand: yarn test
 

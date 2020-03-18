@@ -17,7 +17,7 @@ describe("main#run", () => {
     fs.readFileSync.mockRestore();
   });
 
-  it("calls setOutput for url and version for a single file", () => {
+  it("calls setOutput for url for a single file", () => {
     fs.readFileSync.mockReturnValue(singleDownloadsUrlFileContents);
     const { run } = require("../src/main.js");
 
@@ -25,12 +25,11 @@ describe("main#run", () => {
     run();
 
     expect(core.setOutput.mock.calls).toEqual([
-      ["urls", "mock url 1"],
-      ["version", "mock version"]
+      ["urls", "mock url 1"]
     ]);
   });
 
-  it("calls setOutput for url and version for multiple files", () => {
+  it("calls setOutput for url for multiple files", () => {
     fs.readFileSync.mockReturnValue(multipleDownloadsUrlFileContents);
     const { run } = require("../src/main.js");
 
@@ -38,8 +37,7 @@ describe("main#run", () => {
     run();
 
     expect(core.setOutput.mock.calls).toEqual([
-      ["urls", "mock url 1,mock url 2"],
-      ["version", "mock version"]
+      ["urls", "mock url 1,mock url 2"]
     ]);
   });
 });
