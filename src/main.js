@@ -1,6 +1,9 @@
 const core = require("@actions/core");
 const fs = require("fs");
 
+/**
+ * Runs the GitHub action to output the release urls
+ */
 function run() {
   const releaseInfo = JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH, "utf8"));
 
