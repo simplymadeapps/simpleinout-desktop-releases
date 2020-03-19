@@ -5,7 +5,14 @@ const fs = require("fs");
  * Runs the GitHub action to output the release urls
  */
 function run() {
-  const releaseInfo = JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH, "utf8"));
+  const file = fs.readFileSync(process.env.GITHUB_EVENT_PATH, "utf8");
+  
+  if (!file) {
+    core.setFailed("File Not Found");
+    return;
+  }
+
+  const releaseInfo = JSON.parse(file);
 
   let urls = releaseInfo.release.assets.map(asset => asset.browser_download_url);
   urls = urls.join(",");
