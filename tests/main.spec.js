@@ -5,16 +5,26 @@ const { run } = require("../src/main.js");
 jest.mock("@actions/core");
 jest.mock("fs");
 
-process.env.GITHUB_EVENT_PATH = "mock path";
-
-jest.spyOn(fs, "readFileSync");
-jest.spyOn(core, "setOutput");
-jest.spyOn(core, "setFailed");
+let originalGithubEnv;
+beforeAll(() => {
+  jest.spyOn(fs, "readFileSync");
+  jest.spyOn(core, "setOutput");
+  jest.spyOn(core, "setFailed");
+  originalGithubEnv = process.env.GITHUB_EVENT_PATH;
+  process.env.GITHUB_EVENT_PATH = "mock path";
+});
 
 beforeEach(() => {
   fs.readFileSync.mockReset();
   core.setOutput.mockReset();
   core.setFailed.mockReset();
+});
+
+afterAll(() => {
+  fs.readFileSync.mockRestore();
+  core.setOutput.mockRestore();
+  core.setFailed.mockRestore();
+  process.env.GITHUB_EVENT_PATH = originalGithubEnv;
 });
 
 describe("main#run", () => {
