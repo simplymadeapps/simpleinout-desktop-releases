@@ -6,7 +6,7 @@ const fs = require("fs");
  */
 function run() {
   const file = fs.readFileSync(process.env.GITHUB_EVENT_PATH, "utf8");
-  
+
   if (!file) {
     core.setFailed("File Not Found");
     return;

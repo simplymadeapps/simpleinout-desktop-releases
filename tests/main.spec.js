@@ -19,26 +19,23 @@ beforeEach(() => {
 
 describe("main#run", () => {
   let singleDownloadsUrlFileContents = '{"release":{"assets":[{"browser_download_url": "mock url 1"}]}}';
-  let multipleDownloadsUrlFileContents = '{"release":{"assets":[{"browser_download_url": "mock url 1"},{"browser_download_url": "mock url 2"}]}}';
+  let multipleDownloadsUrlFileContents =
+    '{"release":{"assets":[{"browser_download_url": "mock url 1"},{"browser_download_url": "mock url 2"}]}}';
 
   it("calls setOutput for url for a single file", () => {
     fs.readFileSync.mockReturnValue(singleDownloadsUrlFileContents);
     run();
 
     expect(fs.readFileSync.mock.calls).toEqual([["mock path", "utf8"]]);
-    expect(core.setOutput.mock.calls).toEqual([
-      ["urls", "mock url 1"]
-    ]);
+    expect(core.setOutput.mock.calls).toEqual([["urls", "mock url 1"]]);
   });
 
   it("calls setOutput for url for multiple files", () => {
     fs.readFileSync.mockReturnValue(multipleDownloadsUrlFileContents);
     run();
-    
+
     expect(fs.readFileSync.mock.calls).toEqual([["mock path", "utf8"]]);
-    expect(core.setOutput.mock.calls).toEqual([
-      ["urls", "mock url 1,mock url 2"]
-    ]);
+    expect(core.setOutput.mock.calls).toEqual([["urls", "mock url 1,mock url 2"]]);
   });
 
   it("calls `setFailed` if it cannot read the file", () => {
@@ -47,5 +44,5 @@ describe("main#run", () => {
 
     expect(core.setOutput.mock.calls.length).toEqual(0);
     expect(core.setFailed.mock.calls).toEqual([["File Not Found"]]);
-  })
+  });
 });
