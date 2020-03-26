@@ -23,8 +23,7 @@ jobs:
           cmd: install
 
       - name: Get the release assets info
-        uses: node12
-        main: src/main.js
+        run: node src/main.js
         id: get_info
 
       - name: "Configure AWS credentials"
