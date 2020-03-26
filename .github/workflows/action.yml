@@ -35,6 +35,8 @@ jobs:
 
       - name: "Download files using the release URLs received earlier"
         run: |
+          mkdir latest
+          cd latest
           for i in $(echo ${{ steps.get_info.outputs.urls }} | sed "s/,/ /g")
           do
             curl -O -L $i
