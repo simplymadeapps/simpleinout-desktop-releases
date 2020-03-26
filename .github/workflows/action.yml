@@ -1,0 +1,47 @@
+name: Upload to S3
+
+on:
+  release:
+    types: [ published  ]
+
+jobs:
+  upload:
+    name: Uploading
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v2
+
+      - name: Install node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Install dependencies
+        uses: borales/actions-yarn@v2.1.0
+        with:
+          cmd: install
+
+      - name: Get the release assets info
+        uses: node12
+        main: src/main.js
+        id: get_info
+
+      - name: "Configure AWS credentials"
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID}}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: "Download files using the release URLs received earlier"
+        run: |
+          for i in $(echo ${{ steps.get_info.outputs.urls }} | sed "s/,/ /g")
+          do
+            curl -O -L $i
+          done
+
+      - name: "Copy file to S3 bucket"
+        run: "aws s3 sync --delete . s3://$AWS_S3_BUCKET/desktop/latest"
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
