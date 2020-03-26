@@ -35,12 +35,15 @@ jobs:
 
       - name: "Download files using the release URLs received earlier"
         run: |
+          mkdir latest
+          cd latest
           for i in $(echo ${{ steps.get_info.outputs.urls }} | sed "s/,/ /g")
           do
             curl -O -L $i
           done
+          for FILE in Simple-In-Out*.*; do mv $FILE ${FILE%-*}.${FILE##*.};done
 
       - name: "Copy file to S3 bucket"
-        run: "aws s3 sync --delete . s3://$AWS_S3_BUCKET/desktop/latest"
+        run: "aws s3 sync --delete ./latest s3://$AWS_S3_BUCKET/desktop/latest"
         env:
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
