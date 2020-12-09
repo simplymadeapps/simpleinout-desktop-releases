@@ -41,7 +41,7 @@ jobs:
           do
             curl -O -L $i
           done
-          for FILE in Simple-In-Out*.*; do mv $FILE ${FILE%-*}.${FILE##*.};done
+          for FILE in Simple-In-Out*.exe; do cp $FILE ${FILE%-*}.${FILE##*.};done
 
       - name: "Copy file to S3 bucket"
         run: "aws s3 sync --acl public-read --delete ./latest s3://$AWS_S3_BUCKET/desktop/latest"

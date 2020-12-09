@@ -1,6 +1,6 @@
 {
   "name": "simpleinout-desktop-releases",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Get the info from a release",
   "main": "src/main.js",
