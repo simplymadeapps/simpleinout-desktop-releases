@@ -44,6 +44,6 @@ jobs:
           for FILE in Simple-In-Out*.exe; do cp $FILE ${FILE%-*}.${FILE##*.};done
 
       - name: "Copy file to S3 bucket"
-        run: "aws s3 sync --acl public-read --delete ./latest s3://$AWS_S3_BUCKET/desktop/latest"
+        run: "aws s3 sync --acl public-read --delete ./latest s3://$AWS_S3_BUCKET/desktop"
         env:
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
